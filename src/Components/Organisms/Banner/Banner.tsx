@@ -30,7 +30,17 @@ const LeftChild = styled("div")({
     height: 90,
     marginBottom:15,
     marginLeft:-120
-    
+    // position: "absolute",
+    // left: "4.93%",
+    // right: '60.09%',
+    // top: '17.05%',
+    // bottom: '48.86%',
+    // fontFamily: 'Cera Pro',
+    // fontStyle: "normal",
+    // fontWeight: "700",
+    // fontSize: "36px",
+    // lineHeight: "45px",
+    // color: "#03314B"
   });
   
   const LeftChildDescription = styled("div")({
@@ -39,6 +49,17 @@ const LeftChild = styled("div")({
     color:"",
     fontSize: 18,
     marginLeft:0
+    // position: "absolute",
+    // left: "4.93%",
+    // right: "44.52%",
+    // top: "56.82%",
+    // bottom: "17.05%",
+    // fontFamily: 'Cera Pro',
+    // fontStyle: "normal",
+    // fontWeight: "400",
+    // fontSize: "18px",
+    // lineHeight: "23px",
+    // color: "#6D787E"
   });
 
   const ImageContainer = styled("div")({

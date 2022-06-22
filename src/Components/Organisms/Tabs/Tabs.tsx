@@ -1,4 +1,3 @@
-
 import { TabContext, TabList } from "@mui/lab";
 import { useState } from "react";
 //import { makeStyles } from "@mui/styles";
@@ -44,28 +43,15 @@ let Panel= styled("div")({
 
 export const TabsRest =()=>{
     const[value, setValue] = useState("1");
-   
+    
     const change = (event: React.SyntheticEvent, newValue: string) => {
       console.log(event)
       setValue(newValue);
     };
     const [books, setBooks] = useState<BookInfo[]>([
-      {
-        id: 0,
-        title: "",
-        author: "",
-        timeToRead: "",
-        numberOfReads: "",
-        image: "",
-        status: {
-          isFinished: false,
-          isFeatured: false,
-          isTrending: false,
-          justAdded: false,
-        },
-      },
+    
     ]);
-  
+    //const [currentlyReadingBooks, setCRBooks] = useState<
     const getBooks = async () => {
       const response = await api.get("/booksStore/");
       const data = response.data;
@@ -73,13 +59,15 @@ export const TabsRest =()=>{
       setBooks(data);
     };
   
-   
+   const [pageStatus, setPageStatus] = useState(0)
   
     
   
     useEffect(() => {
       getBooks();
-    }, []);
+    }, [pageStatus]);
+
+  
 
     return(
       
@@ -115,195 +103,207 @@ export const TabsRest =()=>{
              
              {books.filter((b)=> !b.status.isFinished)
              .map((c,index)=>{
-              let img2 = c.image
-              if(img2==='./humanWork.svg'){
-                console.log(c.id)
                return (
-                 <BookCard 
-                   id={c.id}
-                   value={c.id}
-                   key={index}
-                   image= {humanWork}
-                   timeToRead={c.timeToRead}
-                   numberOfReads={c.numberOfReads}
-                   author={c.author}
-                   isFinished={!c.status.isFinished}
-                   title={c.title}
-
-                 />
+                <BookCard setPageStatus={setPageStatus}
+                       id={c.id}
+                       value={c.id}
+                       key={index}
+                       image= {c.image}
+                       timeToRead={c.timeToRead}
+                       numberOfReads={c.numberOfReads}
+                       author={c.author}
+                       isFinished={!c.status.isFinished}
+                       title={c.title}
+                     />
                )}
-               if(img2==='./beingBoss.svg'){
-                return (
-                  <BookCard 
-                    id={c.id}
-                    value={c.id}
-                    key={index}
-                    image= {beingBoss}
-                    timeToRead={c.timeToRead}
-                    numberOfReads={c.numberOfReads}
-                   
-                    author={c.author}
-                    isFinished={!c.status.isFinished}
-                    title={c.title}
-                    //readAgain={c.status.isFinished}
- 
-                  />
-                )}
-                if(img2==='./beyondEntrepreneurship.svg'){
-                  return (
-                    <BookCard 
-                      id={c.id}
-                      value={c.id}
-                      key={index}
-                      image= {be}
-                      timeToRead={c.timeToRead}
-                      numberOfReads={c.numberOfReads}
-                     
-                      author={c.author}
-                      isFinished={!c.status.isFinished}
-                      title={c.title}
-                      //readAgain={c.status.isFinished}
-   
-                    />
-                  )}
-                  if(img2==='./theFateOfFood.svg'){
-                    return (
-                      <BookCard 
-                        id={c.id}
-                        value={c.id}
-                        key={index}
-                        image= {ff}
-                        timeToRead={c.timeToRead}
-                        numberOfReads={c.numberOfReads}
+            //   let img2 = c.image
+            //   if(img2==='./humanWork.svg'){
+            //     console.log(c.id)
+            //    return (
+            //      <BookCard 
+            //        id={c.id}
+            //        value={c.id}
+            //        key={index}
+            //        image= {humanWork}
+            //        timeToRead={c.timeToRead}
+            //        numberOfReads={c.numberOfReads}
+            //        author={c.author}
+            //        isFinished={!c.status.isFinished}
+            //        title={c.title}
+            //      />
+            //    )}
+            //    if(img2==='./beingBoss.svg'){
+            //     return (
+            //       <BookCard
+            //         id={c.id}
+            //         value={c.id}
+            //         key={index}
+            //         image= {beingBoss}
+            //         timeToRead={c.timeToRead}
+            //         numberOfReads={c.numberOfReads}
+            //         author={c.author}
+            //         isFinished={!c.status.isFinished}
+            //         title={c.title}
+            //         //readAgain={c.status.isFinished}
 
-                        author={c.author}
-                        isFinished={!c.status.isFinished}
-                        title={c.title}
-                        //readAgain={c.status.isFinished}
+            //       />
+            //     )}
+            //     if(img2==='./beyondEntrepreneurship.svg'){
+            //       return (
+            //         <BookCard 
+            //           id={c.id}
+            //           value={c.id}
+            //           key={index}
+            //           image= {be}
+            //           timeToRead={c.timeToRead}
+            //           numberOfReads={c.numberOfReads}
+                     
+            //           author={c.author}
+            //           isFinished={!c.status.isFinished}
+            //           title={c.title}
+            //           //readAgain={c.status.isFinished}
+   
+            //         />
+            //       )}
+            //       if(img2==='./theFateOfFood.svg'){
+            //         return (
+            //           <BookCard 
+            //             id={c.id}
+            //             value={c.id}
+            //             key={index}
+            //             image= {ff}
+            //             timeToRead={c.timeToRead}
+            //             numberOfReads={c.numberOfReads}
+
+            //             author={c.author}
+            //             isFinished={!c.status.isFinished}
+            //             title={c.title}
+            //             //readAgain={c.status.isFinished}
      
-                      />
-                    )}
-                    if(img2==='./livesOfStoics.svg'){
-                      return (
-                        <BookCard 
-                          id={c.id}
-                          value={c.id}
-                          key={index}
-                          image= {lvs}
-                          timeToRead={c.timeToRead}
-                          numberOfReads={c.numberOfReads}
+            //           />
+            //         )}
+            //         if(img2==='./livesOfStoics.svg'){
+            //           return (
+            //             <BookCard 
+            //               id={c.id}
+            //               value={c.id}
+            //               key={index}
+            //               image= {lvs}
+            //               timeToRead={c.timeToRead}
+            //               numberOfReads={c.numberOfReads}
                          
-                          author={c.author}
-                          isFinished={!c.status.isFinished}
-                          title={c.title}
-                          //readAgain={c.status.isFinished}
+            //               author={c.author}
+            //               isFinished={!c.status.isFinished}
+            //               title={c.title}
+            //               //readAgain={c.status.isFinished}
        
-                        />
-                      )}
-                      if(img2==='./lovingYourBusiness.svg'){
-                        return (
-                          <BookCard 
-                            id={c.id}
-                            value={c.id}
-                            key={index}
-                            image= {love}
-                            timeToRead={c.timeToRead}
-                            numberOfReads={c.numberOfReads}
+            //             />
+            //           )}
+            //           if(img2==='./lovingYourBusiness.svg'){
+            //             return (
+            //               <BookCard 
+            //                 id={c.id}
+            //                 value={c.id}
+            //                 key={index}
+            //                 image= {love}
+            //                 timeToRead={c.timeToRead}
+            //                 numberOfReads={c.numberOfReads}
                            
-                            author={c.author}
-                            isFinished={!c.status.isFinished}
-                            title={c.title}
-                            //readAgain={c.status.isFinished}
+            //                 author={c.author}
+            //                 isFinished={!c.status.isFinished}
+            //                 title={c.title}
+            //                 //readAgain={c.status.isFinished}
          
-                          />
-                        )}
-                        if(img2==='./theLonelyCentury.svg'){
-                          return (
-                            <BookCard 
-                              id={c.id}
-                              value={c.id}
-                              key={index}
-                              image= {lonely}
-                              timeToRead={c.timeToRead}
-                              numberOfReads={c.numberOfReads}
+            //               />
+            //             )}
+            //             if(img2==='./theLonelyCentury.svg'){
+            //               return (
+            //                 <BookCard 
+            //                   id={c.id}
+            //                   value={c.id}
+            //                   key={index}
+            //                   image= {lonely}
+            //                   timeToRead={c.timeToRead}
+            //                   numberOfReads={c.numberOfReads}
                              
-                              author={c.author}
-                              isFinished={!c.status.isFinished}
-                              title={c.title}
-                              //readAgain={c.status.isFinished}
+            //                   author={c.author}
+            //                   isFinished={!c.status.isFinished}
+            //                   title={c.title}
+            //                   //readAgain={c.status.isFinished}
            
-                            />
-                          )}
-                          if(img2==='./dropshipping.svg'){
-                            return (
-                              <BookCard 
-                                id={c.id}
-                                value={c.id}
-                                key={index}
-                                image= {drop}
-                                timeToRead={c.timeToRead}
-                                numberOfReads={c.numberOfReads}
+            //                 />
+            //               )}
+            //               if(img2==='./dropshipping.svg'){
+            //                 return (
+            //                   <BookCard 
+            //                     id={c.id}
+            //                     value={c.id}
+            //                     key={index}
+            //                     image= {drop}
+            //                     timeToRead={c.timeToRead}
+            //                     numberOfReads={c.numberOfReads}
                                
-                                author={c.author}
-                                isFinished={!c.status.isFinished}
-                                title={c.title}
-                                //readAgain={c.status.isFinished}
+            //                     author={c.author}
+            //                     isFinished={!c.status.isFinished}
+            //                     title={c.title}
+            //                     //readAgain={c.status.isFinished}
              
-                              />
-                            )}
-                            if(img2==='./eatBetterFeelBetter.svg'){
-                              return (
-                                <BookCard 
-                                  id={c.id}
-                                  value={c.id}
-                                  key={index}
-                                  image= {eat}
-                                  timeToRead={c.timeToRead}
-                                  numberOfReads={c.numberOfReads}
+            //                   />
+            //                 )}
+            //                 if(img2==='./eatBetterFeelBetter.svg'){
+            //                   return (
+            //                     <BookCard 
+            //                       id={c.id}
+            //                       value={c.id}
+            //                       key={index}
+            //                       image= {eat}
+            //                       timeToRead={c.timeToRead}
+            //                       numberOfReads={c.numberOfReads}
                                  
-                                  author={c.author}
-                                  isFinished={!c.status.isFinished}
-                                  title={c.title}
-                                  //readAgain={c.status.isFinished}
+            //                       author={c.author}
+            //                       isFinished={!c.status.isFinished}
+            //                       title={c.title}
+            //                       //readAgain={c.status.isFinished}
                
-                                />
-                              )}
-                              if(img2==='./employee.svg'){
-                                return (
-                                  <BookCard 
-                                    id={c.id}
-                                    value={c.id}
-                                    key={index}
-                                    image= {emp}
-                                    timeToRead={c.timeToRead}
-                                    numberOfReads={c.numberOfReads}
+            //                     />
+            //                   )}
+            //                   if(img2==='./employee.svg'){
+            //                     return (
+            //                       <BookCard 
+            //                         id={c.id}
+            //                         value={c.id}
+            //                         key={index}
+            //                         image= {emp}
+            //                         timeToRead={c.timeToRead}
+            //                         numberOfReads={c.numberOfReads}
                                    
-                                    author={c.author}
-                                    isFinished={!c.status.isFinished}
-                                    title={c.title}
-                                    readAgain={c.status.isFinished}
+            //                         author={c.author}
+            //                         isFinished={!c.status.isFinished}
+            //                         title={c.title}
+            //                         readAgain={c.status.isFinished}
                  
-                                  />
-                                )}
-                                if(img2==='./doesntHurtToAsk.svg'){
-                                  return (
-                                    <BookCard 
-                                      id={c.id}
-                                      value={c.id}
-                                      key={index}
-                                      image= {does}
-                                      timeToRead={c.timeToRead}
-                                      numberOfReads={c.numberOfReads}
+            //                       />
+            //                     )}
+            //                     if(img2==='./doesntHurtToAsk.svg'){
+            //                       return (
+            //                         <BookCard 
+            //                           id={c.id}
+            //                           value={c.id}
+            //                           key={index}
+            //                           image= {does}
+            //                           timeToRead={c.timeToRead}
+            //                           numberOfReads={c.numberOfReads}
                                       
-                                      author={c.author}
-                                      isFinished={!c.status.isFinished}
-                                      title={c.title}
-                                      //readAgain={!c.status.isFinished}
+            //                           author={c.author}
+            //                           isFinished={!c.status.isFinished}
+            //                           title={c.title}
+            //                           //readAgain={!c.status.isFinished}
                    
-                                    />
-                                  )}
+            //                         />
+            //                       )}
                               
-             })}
+            //  }
+            )}
             </Panel>
           </TabPanel>
           <TabPanel value="2">
@@ -312,195 +312,210 @@ export const TabsRest =()=>{
               
              {books.filter((b)=> b.status.isFinished)
              .map((c,index)=>{
-               console.log(c.image)
-               let img1 = c.image
-               if(img1==='./humanWork.svg'){
-               return (
-                 <BookCard 
-                   id={c.id}
-                   value={c.id}
-                   key={index}
-                   image= {humanWork}
-                   timeToRead={c.timeToRead}
-                   numberOfReads={c.numberOfReads}
-                  
-                   author={c.author}
-                   //isFinished={c.status.isFinished}
-                   title={c.title}
-                   readAgain={c.status.isFinished}
+              return (
+                <BookCard setPageStatus={setPageStatus}
+                       id={c.id}
+                       value={c.id}
+                       key={index}
+                       image= {c.image}
+                       timeToRead={c.timeToRead}
+                       numberOfReads={c.numberOfReads}
+                       author={c.author}
+                       //isFinished={!c.status.isFinished}
+                       title={c.title}
+                       readAgain={c.status.isFinished}
 
-                 />
-               )}
-               if(img1==='./beingBoss.svg'){
-                return (
-                  <BookCard 
-                    id={c.id}
-                    value={c.id}
-                    key={index}
-                    image= {beingBoss}
-                    timeToRead={c.timeToRead}
-                    numberOfReads={c.numberOfReads}
+                     />
+               )
+              //  console.log(c.image)
+              //  let img1 = c.image
+              //  if(img1==='./humanWork.svg'){
+              //  return (
+              //    <BookCard 
+              //      id={c.id}
+              //      value={c.id}
+              //      key={index}
+              //      image= {humanWork}
+              //      timeToRead={c.timeToRead}
+              //      numberOfReads={c.numberOfReads}
+                  
+              //      author={c.author}
+              //      //isFinished={c.status.isFinished}
+              //      title={c.title}
+              //      readAgain={c.status.isFinished}
+
+              //    />
+              //  )}
+              //  if(img1==='./beingBoss.svg'){
+              //   return (
+              //     <BookCard 
+              //       id={c.id}
+              //       value={c.id}
+              //       key={index}
+              //       image= {beingBoss}
+              //       timeToRead={c.timeToRead}
+              //       numberOfReads={c.numberOfReads}
                    
-                    author={c.author}
-                    //isFinished={c.status.isFinished}
-                    title={c.title}
-                    readAgain={c.status.isFinished}
+              //       author={c.author}
+              //       //isFinished={c.status.isFinished}
+              //       title={c.title}
+              //       readAgain={c.status.isFinished}
  
-                  />
-                )}
-                if(img1==='./beyondEntrepreneurship.svg'){
-                  return (
-                    <BookCard 
-                      id={c.id}
-                      value={c.id}
-                      key={index}
-                      image= {be}
-                      timeToRead={c.timeToRead}
-                      numberOfReads={c.numberOfReads}
+              //     />
+              //   )}
+              //   if(img1==='./beyondEntrepreneurship.svg'){
+              //     return (
+              //       <BookCard 
+              //         id={c.id}
+              //         value={c.id}
+              //         key={index}
+              //         image= {be}
+              //         timeToRead={c.timeToRead}
+              //         numberOfReads={c.numberOfReads}
                      
-                      author={c.author}
-                      //isFinished={c.status.isFinished}
-                      title={c.title}
-                      readAgain={c.status.isFinished}
+              //         author={c.author}
+              //         //isFinished={c.status.isFinished}
+              //         title={c.title}
+              //         readAgain={c.status.isFinished}
    
-                    />
-                  )}
-                  if(img1==='./employee.svg'){
-                    return (
-                      <BookCard 
-                        id={c.id}
-                        value={c.id}
-                        key={index}
-                        image= {emp}
-                        timeToRead={c.timeToRead}
-                        numberOfReads={c.numberOfReads}
+              //       />
+              //     )}
+              //     if(img1==='./employee.svg'){
+              //       return (
+              //         <BookCard 
+              //           id={c.id}
+              //           value={c.id}
+              //           key={index}
+              //           image= {emp}
+              //           timeToRead={c.timeToRead}
+              //           numberOfReads={c.numberOfReads}
                        
-                        author={c.author}
-                        //isFinished={c.status.isFinished}
-                        title={c.title}
-                        readAgain={c.status.isFinished}
+              //           author={c.author}
+              //           //isFinished={c.status.isFinished}
+              //           title={c.title}
+              //           readAgain={c.status.isFinished}
      
-                      />
-                    )}
-                    if(img1==='./theFateOfFood.svg'){
-                      return (
-                        <BookCard 
-                          id={c.id}
-                          value={c.id}
-                          key={index}
-                          image= {ff}
-                          timeToRead={c.timeToRead}
-                          numberOfReads={c.numberOfReads}
+              //         />
+              //       )}
+              //       if(img1==='./theFateOfFood.svg'){
+              //         return (
+              //           <BookCard 
+              //             id={c.id}
+              //             value={c.id}
+              //             key={index}
+              //             image= {ff}
+              //             timeToRead={c.timeToRead}
+              //             numberOfReads={c.numberOfReads}
                          
-                          author={c.author}
-                          //isFinished={c.status.isFinished}
-                          title={c.title}
-                          readAgain={c.status.isFinished}
+              //             author={c.author}
+              //             //isFinished={c.status.isFinished}
+              //             title={c.title}
+              //             readAgain={c.status.isFinished}
        
-                        />
-                      )}
-                      if(img1==='./livesOfStoics.svg'){
-                        return (
-                          <BookCard 
-                            id={c.id}
-                            value={c.id}
-                            key={index}
-                            image= {lvs}
-                            timeToRead={c.timeToRead}
-                            numberOfReads={c.numberOfReads}
+              //           />
+              //         )}
+              //         if(img1==='./livesOfStoics.svg'){
+              //           return (
+              //             <BookCard 
+              //               id={c.id}
+              //               value={c.id}
+              //               key={index}
+              //               image= {lvs}
+              //               timeToRead={c.timeToRead}
+              //               numberOfReads={c.numberOfReads}
                            
-                            author={c.author}
-                            //isFinished={c.status.isFinished}
-                            title={c.title}
-                            readAgain={c.status.isFinished}
+              //               author={c.author}
+              //               //isFinished={c.status.isFinished}
+              //               title={c.title}
+              //               readAgain={c.status.isFinished}
          
-                          />
-                        )}
-                        if(img1==='./lovingYourBusiness.svg'){
-                          return (
-                            <BookCard 
-                              id={c.id}
-                              value={c.id}
-                              key={index}
-                              image= {love}
-                              timeToRead={c.timeToRead}
-                              numberOfReads={c.numberOfReads}
+              //             />
+              //           )}
+              //           if(img1==='./lovingYourBusiness.svg'){
+              //             return (
+              //               <BookCard 
+              //                 id={c.id}
+              //                 value={c.id}
+              //                 key={index}
+              //                 image= {love}
+              //                 timeToRead={c.timeToRead}
+              //                 numberOfReads={c.numberOfReads}
                              
-                              author={c.author}
-                              //isFinished={c.status.isFinished}
-                              title={c.title}
-                              readAgain={c.status.isFinished}
+              //                 author={c.author}
+              //                 //isFinished={c.status.isFinished}
+              //                 title={c.title}
+              //                 readAgain={c.status.isFinished}
            
-                            />
-                          )}
-                          if(img1==='./theLonelyCentury.svg'){
-                            return (
-                              <BookCard 
-                                id={c.id}
-                                value={c.id}
-                                key={index}
-                                image= {lonely}
-                                timeToRead={c.timeToRead}
-                                numberOfReads={c.numberOfReads}
+              //               />
+              //             )}
+              //             if(img1==='./theLonelyCentury.svg'){
+              //               return (
+              //                 <BookCard 
+              //                   id={c.id}
+              //                   value={c.id}
+              //                   key={index}
+              //                   image= {lonely}
+              //                   timeToRead={c.timeToRead}
+              //                   numberOfReads={c.numberOfReads}
                                
-                                author={c.author}
-                                //isFinished={c.status.isFinished}
-                                title={c.title}
-                                readAgain={c.status.isFinished}
+              //                   author={c.author}
+              //                   //isFinished={c.status.isFinished}
+              //                   title={c.title}
+              //                   readAgain={c.status.isFinished}
              
-                              />
-                            )}
-                            if(img1==='./dropshipping.svg'){
-                              return (
-                                <BookCard 
-                                  id={c.id}
-                                  value={c.id}
-                                  key={index}
-                                  image= {drop}
-                                  timeToRead={c.timeToRead}
-                                  numberOfReads={c.numberOfReads}
+              //                 />
+              //               )}
+              //               if(img1==='./dropshipping.svg'){
+              //                 return (
+              //                   <BookCard 
+              //                     id={c.id}
+              //                     value={c.id}
+              //                     key={index}
+              //                     image= {drop}
+              //                     timeToRead={c.timeToRead}
+              //                     numberOfReads={c.numberOfReads}
                                  
-                                  author={c.author}
-                                  //isFinished={c.status.isFinished}
-                                  title={c.title}
-                                  readAgain={c.status.isFinished}
+              //                     author={c.author}
+              //                     //isFinished={c.status.isFinished}
+              //                     title={c.title}
+              //                     readAgain={c.status.isFinished}
                
-                                />
-                              )}
-                              if(img1==='./eatBetterFeelBetter.svg'){
-                                return (
-                                  <BookCard 
-                                    id={c.id}
-                                    value={c.id}
-                                    key={index}
-                                    image= {eat}
-                                    timeToRead={c.timeToRead}
-                                    numberOfReads={c.numberOfReads}
+              //                   />
+              //                 )}
+              //                 if(img1==='./eatBetterFeelBetter.svg'){
+              //                   return (
+              //                     <BookCard 
+              //                       id={c.id}
+              //                       value={c.id}
+              //                       key={index}
+              //                       image= {eat}
+              //                       timeToRead={c.timeToRead}
+              //                       numberOfReads={c.numberOfReads}
                                    
-                                    author={c.author}
-                                    //isFinished={c.status.isFinished}
-                                    title={c.title}
-                                    readAgain={c.status.isFinished}
+              //                       author={c.author}
+              //                       //isFinished={c.status.isFinished}
+              //                       title={c.title}
+              //                       readAgain={c.status.isFinished}
                  
-                                  />
-                                )}
-                                if(img1==='./doesntHurtToAsk.svg'){
-                                  return (
-                                    <BookCard 
-                                      id={c.id}
-                                      value={c.id}
-                                      key={index}
-                                      image= {does}
-                                      timeToRead={c.timeToRead}
-                                      numberOfReads={c.numberOfReads}
+              //                     />
+              //                   )}
+              //                   if(img1==='./doesntHurtToAsk.svg'){
+              //                     return (
+              //                       <BookCard 
+              //                         id={c.id}
+              //                         value={c.id}
+              //                         key={index}
+              //                         image= {does}
+              //                         timeToRead={c.timeToRead}
+              //                         numberOfReads={c.numberOfReads}
                                      
-                                      author={c.author}
-                                      //isFinished={c.status.isFinished}
-                                      title={c.title}
-                                      readAgain={c.status.isFinished}
+              //                         author={c.author}
+              //                         //isFinished={c.status.isFinished}
+              //                         title={c.title}
+              //                         readAgain={c.status.isFinished}
                    
-                                    />
-                                  )}
+              //                       />
+              //                     )}
                                   
                                   
              })}

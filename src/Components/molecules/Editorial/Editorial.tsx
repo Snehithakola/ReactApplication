@@ -3,19 +3,21 @@ import { makeStyles } from "@mui/styles"
 
 const useStyles=makeStyles({
    edit:{
-      position : 'relative',
-      left : '65px',
+    position : 'relative',
+    left : '65px',
+    width: '64px',
+    height: '24px'
    },
 
     editorial:{
 
         position: 'static',
-        width: '64px',
+        width: '54px',
         height: '24px',
-        left: '0px',
-        fontFamily: 'Raleway',
+        // left: '0px',
+        fontFamily: 'Cera Pro',
         fontStyle: 'normal',
-        fontWeight: 'bold',
+        fontWeight: '700',
         fontSize: '16px',
         lineHeight: '24px',     
         color: '#03314B',
@@ -29,13 +31,16 @@ const useStyles=makeStyles({
         width: '214px',
         height: '24px',
         left: '0px',
-        fontFamily: 'Raleway',
+        fontFamily: 'Cera Pro',
         fontStyle: 'normal',
-        fontWeight: 'normal',
+        fontWeight: '400',
         fontSize: '16px',
         lineHeight: '24px',
         color: '#6D787E',
-        marginTop:'16px'
+        marginTop:'16px',
+        flex: 'none',
+        order: '2',
+        flexGrow: '0'
     }
 });
 

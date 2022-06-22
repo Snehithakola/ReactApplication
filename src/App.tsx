@@ -10,6 +10,7 @@ import {useAuth0} from '@auth0/auth0-react';
 import LogoutButton from './Logout';
 import {useState} from 'react';
 import Main1 from './main';
+import Header from './Components/Organisms/HeaderBar/HeaderBar'
 function App() {
   const { isLoading,isAuthenticated} = useAuth0();
   if(isLoading 
@@ -19,8 +20,8 @@ function App() {
   return (
    <>
 
-    
-     {(!isAuthenticated)? <LoginButton />: null}
+      
+     {(!isAuthenticated)? <Router><Header/></Router>: null}
         
         
         

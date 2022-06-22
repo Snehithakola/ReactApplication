@@ -3,39 +3,53 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles=makeStyles({
    edit:{
-      position : 'relative',
-      left : '70px',
+      width: '73px',
+      height: '24px',
+      // position : 'relative',
+      // left : '70px',
    },
 
     title:{
 
-        position: 'static',
-        width: '64px',
-        height: '24px',
-        left: '0px',
-        fontFamily: 'Raleway',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '16px',
-        lineHeight: '24px',     
-        color: '#03314B',
-        flex: 'none',
-        order: '0',
-        flexGrow: '0'
-        
+      position: 'static',
+      //   width: '64px',
+      //   height: '24px',
+      //left: '0px',
+      //   fontFamily: 'Raleway',
+      //   fontStyle: 'normal',
+      //   fontWeight: 'bold',
+      //   fontSize: '16px',
+      //   lineHeight: '24px',     
+      //   color: '#03314B',
+      //   flex: 'none',
+      //   order: '0',
+      //   flexGrow: '0'
+      // width: '73px', 
+      // height: '24px',
+      fontFamily: 'Cera Pro',
+      fontStyle: 'normal',
+      fontWeight: '700',
+      fontSize: '16px',
+      lineHeight: '24px',
+      color: '#03314B',
+      flex: 'none',
+      order: '0',
+      flexGrow: '0'
     },
     element:
     {
         width: '214px',
         height: '24px',
-        left: '0px',
-        fontFamily: 'Raleway',
+        fontFamily: 'Cera Pro',
         fontStyle: 'normal',
-        fontWeight: 'normal',
+        fontWeight: '400',
         fontSize: '16px',
         lineHeight: '24px',
         color: '#6D787E',
-        marginTop:'16px'
+        marginTop:'16px',
+        flex: 'none',
+         order: '2',
+         flexGrow: '0'
     }
 });
 

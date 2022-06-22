@@ -3,6 +3,7 @@ import {ExploreData} from "../../../Data/ExploreData"
 import { Box, Typography } from "@mui/material";
 import { makeStyles, styled } from "@mui/styles";
 import { Link } from "react-router-dom";
+//import {BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 
 const Principle = styled("div")({
     width: "100%",
@@ -74,6 +75,7 @@ const Principle = styled("div")({
   
     return (
       <Principle>
+        {/* <Router> */}
         <div className={styles.mainDiv}>
           <Box className={styles.firstBox}>
               <Typography className={styles.highlight}>Explore by category</Typography>
@@ -94,6 +96,7 @@ const Principle = styled("div")({
           </Box>
           </Link>
         </div>
+      
       </Principle>
     );
   };

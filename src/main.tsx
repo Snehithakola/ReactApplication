@@ -8,14 +8,16 @@ import {BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 
 function Main1() {
     
-  
     return (
      <>
+     {console.log("inside main return fn")}
       <div className="App">
          <Router>
+           
        <Routes>
+       
            < Route path='/' element={<Page2 />} />
-           < Route path='/bookview' element={<BookView />} />
+           < Route path='/bookview' element={<BookView />} /> 
            < Route path='/bookcat' element={<Entrepreneurship />} />
   
          </Routes>

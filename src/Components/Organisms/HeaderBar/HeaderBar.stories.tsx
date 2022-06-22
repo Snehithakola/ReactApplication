@@ -1,5 +1,5 @@
 import {  ComponentStory } from "@storybook/react"
-
+import {BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 import HeaderBar from "./HeaderBar"
 
 export default{
@@ -8,6 +8,6 @@ export default{
     component:HeaderBar
 };
 
-const Template : ComponentStory<typeof HeaderBar> = (args) => <HeaderBar{...args} /> 
+const Template : ComponentStory<typeof HeaderBar> = (args) => <Router><HeaderBar{...args} /></Router>
 
 export const BasicAppBar = Template.bind({});

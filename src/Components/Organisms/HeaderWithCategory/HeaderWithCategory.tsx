@@ -221,7 +221,7 @@ const HeaderWithCategories=(props:Props)=>
 
            <Box className={classes.main1}>
          <Box className={classes.account}>
-              <Button startIcon={ <Avatars alphabet="R" />    } endIcon= { <IconButton >
+              <Button startIcon={ <Avatars alphabet="A" />    } endIcon= { <IconButton >
                    <KeyboardArrowDownIcon className={classes.expand2}
                       ></KeyboardArrowDownIcon>
                              </IconButton>}

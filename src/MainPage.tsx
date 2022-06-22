@@ -1,5 +1,5 @@
 import { MainBanner } from './Components/Organisms/Banner/Banner' 
-import { SearchBar } from  './Components/molecules/SearchBar/Search'
+//import { SearchBar } from  './Components/molecules/SearchBar/Search'
 import { FilterByCategory } from './Components/Organisms/ByCategories/FilterByCategory'
 import { Footer } from './Components/Organisms/Footer/Footer' 
 import HeaderBar from "./Components/Organisms/HeaderBar/HeaderBar"

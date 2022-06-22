@@ -1,6 +1,5 @@
 import { ComponentStory } from "@storybook/react";
-
-
+import {BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 import { FilterByCategory } from "./FilterByCategory";
 
 
@@ -9,7 +8,7 @@ export default {
     component: FilterByCategory
 }
 
-const Template: ComponentStory<typeof FilterByCategory> = args => <FilterByCategory  {...args} />
+const Template: ComponentStory<typeof FilterByCategory> = args => <Router><FilterByCategory  {...args} /></Router>
 
 
 export const Featured = Template.bind({})

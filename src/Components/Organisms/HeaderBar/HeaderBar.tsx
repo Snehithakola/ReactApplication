@@ -1,5 +1,5 @@
-import { Box,  Button, Grid,    IconButton,    InputAdornment,    TextField,    Typography } from "@mui/material"
-import React, { useState }  from "react"
+import { Box,  Button, Grid,    IconButton,    InputAdornment,    TextField, List,ListItem,   Typography } from "@mui/material"
+import React, { useState,useEffect }  from "react"
 import { makeStyles ,styled } from "@mui/styles"
 import {Icons,IconProps} from "../../atoms/BlinkistLogo/Blinkistlogo"
 import SearchItem from "../../atoms/SearchItem/SearchItem"
@@ -10,7 +10,11 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { Link } from "react-router-dom"
 import LogoutButton from '../../../Logout'
-
+import {useAuth0} from '@auth0/auth0-react';
+import LoginButton from '../../../loginButton';
+import {BookInfo } from "../../molecules/BookCards/Bookcards";
+import api from "../../../api/api";
+//import {BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 
 const MainContainer = styled("div")({
     width: "100%",
@@ -199,7 +203,7 @@ interface Props{
     const classes=useStyles();
     const [search,setSearch]=useState(false);
     let [account, setAccount] =useState(false);
-
+    const { isLoading,isAuthenticated} = useAuth0();
     const expandAccountDropdown = () => {
       account ? setAccount(false) : setAccount(true);
     };
@@ -208,6 +212,63 @@ interface Props{
     {
        setSearch(true);   
     }
+
+    const [books, setBooks] = useState<BookInfo[]>([
+      {
+        id: 0,
+        title: "",
+        author: "",
+        timeToRead: "",
+        numberOfReads: "",
+        image: "",
+        status: {
+          isFinished: false,
+          isFeatured: false,
+          isTrending: false,
+          justAdded: false,
+        },
+      },
+    ]);
+  
+    const getBooks = async () => {
+      const response = await api.get("/booksStore/");
+      const data = response.data;
+  
+      setBooks(data);
+    };
+     useEffect(() => {
+      getBooks();
+    }, [books]);
+
+    const [filteredData, setFilteredData] = useState<any>(null);
+  const SearchFun = async(event: any)=>{
+    let input_data= event.target.value
+  
+  
+
+   
+  setFilteredData( 
+    books.filter((book:any)=>{
+      for(let prop in book)
+      {
+        
+        if(input_data.length>0 && book[prop].length>=input_data.length && book[prop].substr(0,input_data.length)===input_data) 
+        {
+          console.log(book[prop])
+          return true;
+        }
+      }
+      return false;
+    })
+    .map((book:any)=>{
+      return {
+        id:book.id,
+        name:book.title,
+        authorName:book.author,
+      }
+    })
+  )
+}
 
     const closeSearch:React.MouseEventHandler<HTMLButtonElement>= ()=>
     {
@@ -228,7 +289,7 @@ interface Props{
            <SearchItem handleSearch={handleSearch} />
            </Box>
             {search===true && <>
-                <TextField id="search" label="Search by title" onChange={(event)=>props.handleSearchTerm(event,event.target.value) }
+                <TextField id="search" label="Search by title" onKeyUp={SearchFun}  
  className={classes.searchField} variant="standard" InputProps={{
   endAdornment: (
     <InputAdornment position="end">
@@ -237,6 +298,44 @@ interface Props{
     </InputAdornment> 
   ) }}
 > </TextField>
+<Box
+        sx={{
+          backgroundColor: "white",
+          height: "auto",
+          width: "100%",
+        }}
+      >
+        <List
+          sx={{
+            width: "100%",
+            bgcolor: "background.paper",
+            position: "absolute",
+            top: "80px",
+            fontFamily: "Cera",
+          }}
+        >
+          {filteredData !== null &&
+            filteredData.map((value: any) => (
+              <Link
+                to={`/booksStore/${value.id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <ListItem
+                  key={`${value.id}`}
+                  sx={{ display: "flex" }}
+                  data-testid="result"
+                >
+                  <Typography sx={{ fontWeight: "bold", fontFamily: "Cera" }}>
+                    {value.name}
+                  </Typography>
+                  <Typography sx={{ color: "gray", marginLeft: "10px" }}>
+                    by {value.authorName}
+                  </Typography>
+                </ListItem>
+              </Link>
+            ))}
+        </List>
+      </Box>
             
          </>}
 
@@ -258,13 +357,19 @@ interface Props{
                                 </Button>
 
                                 </Box> </Box><Box >
+                                  
                                    <Link to ='/' >
                                     <Typography variant="body1" className={classes.library}>
                                         My Library
                                     </Typography>
                                     </Link>
+                                    
                             </Box></>
-      } <Box className={classes.main1}>
+      } 
+      {
+          !isAuthenticated
+          ? (<LoginButton />):
+        <Box className={classes.main1}>
          <Box className={classes.account} >
            <div data-testid="answer" >
               <Button  startIcon={ <Avatars alphabet="A" />    } endIcon= { <IconButton >
@@ -276,7 +381,9 @@ interface Props{
               </div>
            </Box>
           </Box>
+      }
           </Box>
+          
           </MainContainer2>
           </MainContainer>
           <div data-testid='logoutt' className={classes.logout1}>{account ? <LogoutButton  /> : null} </div>

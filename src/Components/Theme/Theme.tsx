@@ -47,21 +47,24 @@ const theme = createTheme({
       lineHeight: "32px",
       color: "#0365F2",
     },
+    
     caption: {
       fontFamily: "Cera Pro",
       fontWeight: "regular",
       fontSize: "14px",
       lineHeight: "22px",
       color: "#6D787E",
+
     },
+    
   },
+  
   components: {
     MuiTab: {
       styleOverrides: {
         root: {
           textTransform: "capitalize",
           placeItems: "flex-start",
-
           fontSize: "18px",
           lineHeight: "23px",
         },

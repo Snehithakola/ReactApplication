@@ -10,21 +10,18 @@ import { Links } from "../../molecules/Links/Links"
 const useStyles=makeStyles({
 
     footer:{
-            
+        display: 'grid',
         height: '370px',
         top: '111px',
         borderRadius: '0px',
-        display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        position: 'relative',
-        backgroundColor: '#F1F6F4'
-        
+        // position: 'relative',
+        backgroundColor: '#F1F6F4',
+        overflow : 'wrap'
     },
   
-  
-
 });
 
 
@@ -45,7 +42,7 @@ export const Footer:React.FunctionComponent= (props) =>
 
      <Grid item>
 
-      <Grid container columnSpacing='32px' >
+      <Grid container  >
 
             <Grid item sx={{ marginLeft: "244px"}}>
             <BigIdeas /> 
@@ -65,8 +62,8 @@ export const Footer:React.FunctionComponent= (props) =>
 
       </Grid>
 
-      <Grid item sx={{marginLeft:'-900px',marginTop:'100px',marginBottom:'38px'}}><CopyRights /></Grid>
-
+      {/* <Grid item sx={{marginLeft:'-900px',marginTop:'100px',marginBottom:'38px'}}><CopyRights /></Grid> */}
+      <Grid item sx={{marginLeft:'-500px',marginTop:'100px',marginBottom:'38px'}}><CopyRights /></Grid>
 
     </Grid>
 

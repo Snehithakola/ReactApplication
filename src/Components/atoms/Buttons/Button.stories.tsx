@@ -22,3 +22,27 @@ AddToLibraryButtonHoverState.args = {
     children: 'Add to library'
 }
 
+export const FinishedButtonHoverState = Template.bind({})
+FinishedButtonHoverState.args = {
+    variant: 'contained',
+    //startIcon: <AddIcon />,
+    style: {
+        backgroundColor: '#0365F2',
+        color: 'white',
+        textTransform: 'none'
+    },
+    children: 'Finished'
+}
+
+export const ReadAgainButtonHoverState = Template.bind({})
+ReadAgainButtonHoverState.args = {
+    variant: 'contained',
+    //startIcon: <AddIcon />,
+    style: {
+        backgroundColor: '#0365F2',
+        color: 'white',
+        textTransform: 'none'
+    },
+    children: 'Read again'
+}
+

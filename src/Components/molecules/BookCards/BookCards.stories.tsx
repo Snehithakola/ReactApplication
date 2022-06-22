@@ -1,14 +1,14 @@
 import { Story } from "@storybook/react";
 import {BookCard,BookCardProps } from "./Bookcards";
 import beingBoss from '../../../images/beingBoss.svg'
-
+import {BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 
 export default {
     title: 'Molecules/Card',
     component: BookCard
 }
 
-let Template: Story<BookCardProps> = args => <BookCard {...args} />
+let Template: Story<BookCardProps> = args => <Router><BookCard {...args} /></Router>
 
 export const BookCard1 = Template.bind({})
 BookCard1.args = {

@@ -10,6 +10,7 @@ import api from "../../../api/api";
 import { Typography } from "@mui/material";
 import {ButtonComponent} from "../../atoms/Buttons/Button";
 import {Link } from 'react-router-dom';
+import {BrowserRouter as Router ,Routes,Route } from 'react-router-dom'
 import { WindowSharp } from "@mui/icons-material";
 
 
@@ -117,7 +118,7 @@ let Principle = styled("div")({
     numberOfReads?: string;
     value: number;
     className?: string;
-    
+    setPageStatus: any;
   }
   
   export type BookInfo = {
@@ -181,7 +182,7 @@ export const BookCard =(props: BookCardProps) =>{
        // bookInfo.status.isTrending = false
     
         await api.put(`/booksStore/${num}`, bookInfo)
-       window.location.reload();
+       //window.location.reload();
       }
     
       let updateFinish = async (num: number) => {
@@ -193,13 +194,17 @@ export const BookCard =(props: BookCardProps) =>{
         }
     
         await api.put(`/booksStore/${num}`, bookInfo)
-        window.location.reload();
+        //window.location.reload();
+        props.setPageStatus((prevState:any) =>prevState+1)
       }
     
       return(
+        
           <ThemeProvider theme={theme}>
              
             <Principle>
+            {/* 
+             */}
             <div data-testid="addLib">
             <Link to='/bookview' >
               <ImageContainer>
@@ -250,7 +255,7 @@ export const BookCard =(props: BookCardProps) =>{
           ) : null}
            {((props.addToLibrary)&&(!props.isFinished) ) ? (
           <ButtonDiv>
-            <ButtonComponent startIcon={<Add />} className={styles.button1} >Add To Library</ButtonComponent>
+            <ButtonComponent startIcon={<Add />} className={styles.button1} >Add To Library</ButtonComponent> 
           </ButtonDiv>
         ) : null}
 
@@ -262,11 +267,10 @@ export const BookCard =(props: BookCardProps) =>{
             </div>
           </ButtonDiv>
         ) : null}
-           </div>
+           </div> 
+           
             </Principle>
            
           </ThemeProvider>
       )
-
-
 }

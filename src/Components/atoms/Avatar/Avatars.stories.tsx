@@ -12,5 +12,5 @@ const Template:ComponentStory<typeof Avatars>= (args) => <Avatars {...args} />
 
 export const A= Template.bind({});
 A.args={
-    alphabet:'A'
+    alphabet:'S',
 };
